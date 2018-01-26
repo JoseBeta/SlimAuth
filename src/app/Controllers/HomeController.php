@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\User;
+use Slim\Views\Twig as View;
 
-class HomeController{
+class HomeController extends Controller{    
     public function index($request, $response){
-        return 'Home Controller';
+        return $this->view->render($response, 'home.twig');
     }
 }
