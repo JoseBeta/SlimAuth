@@ -43,6 +43,13 @@ $container['view'] = function($container){
             $container->request->getUri()
         ));
     
+    $view->getEnvironment()->addGlobal('auth', [
+        'check' => $container->auth->check(),
+        'user' => $container->auth->user(),
+    ]);
+    
+    $view->getEnvironment()->addGlobal('flash', $container->flash);
+    
     return $view;
 };
 
@@ -54,12 +61,24 @@ $container['HomeController'] = function($container){
     return new \App\Controllers\HomeController($container);
 };
 
+$container['AuthController'] = function($container){
+    return new \App\Controllers\Auth\AuthController($container);
+};
+
+$container['PasswordController'] = function($container){
+    return new \App\Controllers\Auth\PasswordController($container);
+};
+
 $container['csrf'] = function($container){
     return new \Slim\Csrf\Guard;
 };
 
-$container['AuthController'] = function($container){
-    return new \App\Controllers\Auth\AuthController($container);
+$container['auth'] = function($container){
+    return new \App\Auth\Auth;
+};
+
+$container['flash'] = function($container){
+    return new \Slim\Flash\Messages;
 };
 
 $app->add(new \App\Middleware\ValidationErrorsMiddleware($container));
