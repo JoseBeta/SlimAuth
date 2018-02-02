@@ -94,6 +94,10 @@ $container['twitterAuth'] = function($container){
     return new \App\Auth\SocialNetwork\Twitter($container);
 };
 
+$container['googleAuth'] = function($container){
+    return new \App\Auth\SocialNetwork\Google($container);
+};
+
 
 $app->add(new \App\Middleware\ValidationErrorsMiddleware($container));
 $app->add(new \App\Middleware\OldInputMiddleware($container));

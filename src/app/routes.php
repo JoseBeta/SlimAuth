@@ -13,6 +13,7 @@ $app->group('', function(){
     $this->post('/auth/signin', 'AuthController:postSignIn');
     
     $this->get('/auth/signin/facebook', 'facebookAuth:facebookAuth')->setName('auth.signin.facebook');
+    $this->get('/auth/signin/google', 'googleAuth:googleAuth')->setName('auth.signin.google');
     $this->get('/auth/signin/twitter', 'twitterAuth:twitterAuth')->setName('auth.signin.twitter');
 })->add(new GuestMiddleware($container));
 
