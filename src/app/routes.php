@@ -11,6 +11,9 @@ $app->group('', function(){
     
     $this->get('/auth/signin', 'AuthController:getSignIn')->setName('auth.signin');
     $this->post('/auth/signin', 'AuthController:postSignIn');
+    
+    $this->get('/auth/signin/facebook', 'facebookAuth:facebookAuth')->setName('auth.signin.facebook');
+    $this->get('/auth/signin/twitter', 'twitterAuth:twitterAuth')->setName('auth.signin.twitter');
 })->add(new GuestMiddleware($container));
 
 $app->group('', function(){

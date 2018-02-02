@@ -81,6 +81,20 @@ $container['flash'] = function($container){
     return new \Slim\Flash\Messages;
 };
 
+$container['hybridauth'] = function(){
+    return new Hybrid_Auth('config.php');
+};
+
+
+$container['facebookAuth'] = function($container){
+    return new \App\Auth\SocialNetwork\Facebook($container);
+};
+
+$container['twitterAuth'] = function($container){
+    return new \App\Auth\SocialNetwork\Twitter($container);
+};
+
+
 $app->add(new \App\Middleware\ValidationErrorsMiddleware($container));
 $app->add(new \App\Middleware\OldInputMiddleware($container));
 $app->add(new \App\Middleware\CsrfViewMiddleware($container));

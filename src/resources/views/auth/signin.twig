@@ -2,7 +2,7 @@
 
 {% block content %}
 	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
+		<div class="col-md-6">
 			<div class='panel panel-default'>
 				<div class="panel-heading">Sign in</div>
 				<div class="panel-body">
@@ -26,6 +26,16 @@
 						{{ csrf.field | raw}}
 						
 					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class='panel panel-default'>
+				<div class="panel-heading">Sign in with your social networks</div>
+				<div class="panel-body">
+					<a href="{{ path_for('auth.signin.facebook') }}" class="btn btn-block btn-social btn-facebook"><span class="fa fa-facebook"></span> Connect with Facebook</a>
+                    <a href="{{ path_for('home') }}" class="btn btn-block btn-social btn-google"><span class="fa fa-google"></span> Connect with Google</a>
+                    <a href="{{ path_for('auth.signin.twitter') }}" class="btn btn-block btn-social btn-twitter"><span class="fa fa-twitter"></span> Connect with Twitter</a>
 				</div>
 			</div>
 		</div>
