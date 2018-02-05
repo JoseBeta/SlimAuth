@@ -6,7 +6,7 @@ use \Slim\Views\Twig as View;
 class Controller{
     protected $container;
     
-    public function __Construct($container){
+    public function __construct($container){
         $this->container = $container;
     }
     
