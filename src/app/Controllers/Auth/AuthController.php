@@ -47,15 +47,22 @@ class AuthController extends Controller{
             return $response->withRedirect($this->router->pathFor('auth.signup'));
         }
         
-        $user = User::create([
-            'email'=>$request->getParam('email'),
-            'name'=>$request->getParam('name'),
-            'password'=>password_hash($request->getParam('password'), PASSWORD_DEFAULT)
-        ]);
+        $existingUser = $this->container->auth->findUser($request->getParam('email'));
+        
+        if($existingUser === null){
+            $user = User::create([
+                'email'=>$request->getParam('email'),
+                'name'=>$request->getParam('name'),
+                'password'=>password_hash($request->getParam('password'), PASSWORD_DEFAULT)
+            ]);
+        }else{
+            $existingUser->setPassword($request->getParam('password'));
+        }
+        
         
         $this->flash->addMessage('info', 'You have been signed up!');
         
-        $this->auth->attempt($user->email, $request->getParam('password'));
+        $this->container->auth->attempt($request->getParam('email'), $request->getParam('password'));
         
         return $response->withRedirect($this->router->pathFor('home'));
     }

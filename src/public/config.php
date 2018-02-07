@@ -24,7 +24,7 @@ return array(
         "Twitter" => array(
             "enabled" => true,
             "keys" => array("key" => "66J36mqBgNzAKAX8TzcjqrI7y", "secret" => "ywdrClwSonzTSYQGfFLPBrunbiZQ7LDsRlp2qjUuNQoRZAcdF1"),
-            "includeEmail" => false,
+            "includeEmail" => true,
         ),
     ),
     // If you want to enable logging, set 'debug_mode' to true.

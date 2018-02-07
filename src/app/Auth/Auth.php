@@ -5,6 +5,11 @@ namespace App\Auth;
 use App\Models\User;
 
 class Auth{
+    protected $container;
+    
+    public function __construct($container){
+        $this->container = $container;
+    }
     
     public function user(){
         if(isset($_SESSION['user'])){
@@ -16,8 +21,12 @@ class Auth{
         return isset($_SESSION['user']);
     }
     
+    public function findUser($email){
+        return User::where('email', $email)->first();
+    }
+    
     public function attempt($email, $password){
-        $user = User::where('email', $email)->first();
+        $user = self::findUser($email);
         
         if(!$user){
             return false;
@@ -34,5 +43,6 @@ class Auth{
     
     public function logout(){
         unset($_SESSION['user']);
+        $this->container->hybridauth->logoutAllProviders();
     }
 }

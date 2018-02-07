@@ -74,7 +74,7 @@ $container['csrf'] = function($container){
 };
 
 $container['auth'] = function($container){
-    return new \App\Auth\Auth;
+    return new \App\Auth\Auth($container);
 };
 
 $container['flash'] = function($container){
