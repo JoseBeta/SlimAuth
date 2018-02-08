@@ -12,11 +12,6 @@ class User extends Model{
         'email',
         'password',
         'name',
-        'lastName',
-        'phone',
-        'country',
-        'city',
-        'address',
     ];
     
     public function setPassword($password){

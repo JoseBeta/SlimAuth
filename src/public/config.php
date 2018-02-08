@@ -14,7 +14,11 @@ return array(
     "providers" => array(
         "Google" => array(
             "enabled" => true,
-            "keys" => array("id" => "1039414581619-afdipb3bhi2kjb3k5dgd09d6doie2tnb.apps.googleusercontent.com ", "secret" => "vlEmxkCG3xN43h4G9Dn2hQfK"),
+            "keys" => array("id" => "1039414581619-afdipb3bhi2kjb3k5dgd09d6doie2tnb.apps.googleusercontent.com", "secret" => "NHK-MjJKhNUg7lhQx39C959D"),
+            "scope"  => "https://www.googleapis.com/auth/plus.login ".
+                        "https://www.googleapis.com/auth/plus.me ".
+                        "https://www.googleapis.com/auth/plus.profile.emails.read",
+        
         ),
         "Facebook" => array(
             "enabled" => true,

@@ -4,6 +4,7 @@ use App\Middleware\AuthMiddleware;
 use App\Middleware\GuestMiddleware;
 
 $app->get('/', 'HomeController:index')->setName('home');
+$app->get('/form', 'FormController:index')->setName('form');
 
 $app->group('', function(){
     $this->get('/auth/signup', 'AuthController:getSignUp')->setName('auth.signup');

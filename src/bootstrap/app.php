@@ -12,7 +12,7 @@ $app = new \Slim\App([
         'db'=>[
             'driver'=>'mysql',
             'host'=>'localhost',
-            'database'=>'users',
+            'database'=>'sociallogin',
             'username'=>'root',
             'password'=>'',
             'charset'=>'utf8',
@@ -96,6 +96,10 @@ $container['twitterAuth'] = function($container){
 
 $container['googleAuth'] = function($container){
     return new \App\Auth\SocialNetwork\Google($container);
+};
+
+$container['FormController'] = function($container){
+    return new \App\Controllers\FormController($container);
 };
 
 

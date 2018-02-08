@@ -13,13 +13,15 @@ class SocialNetwork{
     }
     
     function auth($provider) {
-        try {
+        try {            
             $hybridauth = $this->container->hybridauth;
             
             $adapter = $hybridauth->authenticate($provider);
             
             $user_profile = $adapter->getUserProfile();
             $accessToken = $adapter->getAccessToken();
+            //var_dump($user_profile);
+            //die();
             
             self::postSignUp($user_profile, $provider, $accessToken['access_token']);
             
@@ -42,6 +44,7 @@ class SocialNetwork{
     }
     
     function postSignUp($user, $provider, $token){
+        $userAccount;
         $existingUser = $this->container->auth->findUser($user->email);
         $userId;
         $socialId = $user->identifier;
@@ -50,22 +53,17 @@ class SocialNetwork{
             $userCreated = User::create([
                 'email'=>$user->email,
                 'name'=>$user->firstName,
-                'lastName'=>$user->lastName,
-                'phone'=>$user->phone,
-                'country'=>$user->country,
-                'city'=>$user->city,
-                'address'=>$user->address,
             ]);
             
-            $userId = $userCreated->id;
+            $userAccount = $userCreated;
         }else{
-            $userId = $existingUser->id;
+            $userAccount = $existingUser;
         }
         
-        $social = self::findSocialService($userId, $provider, $socialId);
+        $social = self::findSocialService($userAccount->id, $provider, $socialId);
         
         if($social === null){
-            self::postSocial($socialId, $userId, $provider, $token);
+            self::postSocial($socialId, $userAccount, $provider, $token);
         }
     }
     
@@ -73,12 +71,17 @@ class SocialNetwork{
         return User_social::where('user_id', $userId)->where('service', $service)->where('social_id', $socialId)->first();
     }
     
-    function postSocial($socialId, $userId, $service, $token){
+    function postSocial($socialId, $userAccount, $service, $token){
         $social = User_social::create([
             'social_id'=>$socialId,
-            'user_id'=>$userId,
+            'user_id'=>$userAccount->id,
             'service'=>$service,
             'token'=>$token,
+            'lastName'=>$userAccount->lastName,
+            'phone'=>$userAccount->phone,
+            'country'=>$userAccount->country,
+            'city'=>$userAccount->city,
+            'address'=>$userAccount->address,
         ]);
     }
 }

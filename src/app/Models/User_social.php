@@ -13,5 +13,10 @@ class User_social extends Model{
         'user_id',
         'service',
         'token',
+        'lastName',
+        'phone',
+        'country',
+        'city',
+        'address',
     ];
 }
