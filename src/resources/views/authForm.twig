@@ -1,0 +1,50 @@
+{% extends 'templates/app.twig' %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class='panel panel-default'>
+				<div class="panel-body">
+					<form action="{{ path_for('form') }}" method="post" autocomplete="off">
+						<div class="form-group">
+    						<label for="email">Email</label>
+    						<input type="email" name="email" id="email" placeholder="you@domain.com" class="form-control">
+						</div>
+						<div class="form-group">
+    						<label for="name">Name</label>
+    						<input type="text" name="name" id="name" placeholder="here goes your name" class="form-control">
+						</div>
+						<div class="form-group">
+    						<label for="lastName">Last Name</label>
+    						<input type="text" name="lastName" id="lastName" placeholder="here goes your last name" class="form-control">
+						</div>
+						<div class="form-group">
+    						<label for="phone">Phone</label>
+    						<input type="text" name="phone" id="phone" placeholder="Example: 555015012" class="form-control">
+						</div>
+						<div class="form-group">
+    						<label for="country">Country</label>
+    						<input type="text" name="country" id="country" placeholder="Example: England, Spain, Italy..." class="form-control">
+						</div>
+						<div class="form-group">
+    						<label for="city">City</label>
+    						<input type="text" name="city" id="city" placeholder="Example: London, Madrid, Milan..." class="form-control">
+						</div>
+						<div class="form-group">
+    						<label for="address">Address</label>
+    						<input type="text" name="address" id="address" placeholder="example: baker street, 221b" class="form-control">
+						</div>
+						<div class="form-group">
+    						<label for="notes">Notes</label>
+    						<input type="textArea" name="notes" id="notes" placeholder="Put here anything we need to know in here" class="form-control">
+						</div>
+						<button type="submit" class="btn btn-default">Sign up</button>
+						
+						{{ csrf.field | raw}}
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{%  endblock %}
