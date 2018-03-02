@@ -98,9 +98,6 @@ $container['googleAuth'] = function($container){
     return new \App\Auth\SocialNetwork\Google($container);
 };
 
-$container['FormController'] = function($container){
-    return new \App\Controllers\FormController($container);
-};
 
 
 $app->add(new \App\Middleware\ValidationErrorsMiddleware($container));
