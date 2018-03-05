@@ -2,7 +2,7 @@
 
 namespace App\Auth;
 
-use App\Models\User;
+//use App\Models\User;
 
 class Auth{
     protected $container;
@@ -13,7 +13,12 @@ class Auth{
     
     public function user(){
         if(isset($_SESSION['user'])){
-            return User::find($_SESSION['user']);
+            $client = \ClientQuery::create()
+            ->filterById($_SESSION['user'])
+            ->find();
+            var_dump($client->getFirst());
+            
+            return $client->getFirst();
         }
     }
     
@@ -22,7 +27,12 @@ class Auth{
     }
     
     public function findUser($email){
-        return User::where('email', $email)->first();
+        $client = \ClientQuery::create()
+        ->filterByEmail($email)
+        ->find();
+        var_dump($client->getFirst());
+        
+        return $client->getFirst();
     }
     
     public function attempt($email, $password){

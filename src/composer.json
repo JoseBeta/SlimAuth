@@ -2,11 +2,11 @@
 	"require" : {
 		"slim/slim" : "^3.0",
 		"slim/twig-view" : "^2.3",
-		"illuminate/database" : "^5.4",
 		"respect/validation" : "^1.1",
 		"slim/csrf" : "^0.8.2",
 		"slim/flash" : "^0.4.0",
-		"hybridauth/hybridauth" : "~2.0"
+		"hybridauth/hybridauth" : "~2.0",
+		"propel/propel1": "1.6.8"
 	},
 	"autoload" : {
 		"psr-4" : {

@@ -2,9 +2,6 @@
 
 namespace App\Auth\SocialNetwork;
 
-use App\Models\User;
-use App\Models\User_social;
-
 class SocialNetwork{
     protected $container;
     
@@ -50,38 +47,28 @@ class SocialNetwork{
         $socialId = $user->identifier;
         
         if($existingUser === null){
-            $userCreated = User::create([
-                'email'=>$user->email,
-                'name'=>$user->firstName,
-            ]);
-            
-            $userAccount = $userCreated;
+           $newUser = new \Client();
+           $newUser->setEmail($user->email);
+           $newUser->setName($user->firstName);
+           $newUser->setSurname($user->lastName);
+           $newUser->setTlf($user->phone);
+           $newUser->setAdress($user->address);
+           $newUser->setCity($user->city);
+           $newUser->setCountryId("1");
+           $newUser->setCardData("2");
+           $newUser->setCountryName($user->country);
+           $newUser->setSocialId($user->identifier);
+           $newUser->setService($provider);
+           $newUser->setToken($token);
+           $newUser->save(); 
+           
+            $userAccount = $newUser;
         }else{
             $userAccount = $existingUser;
         }
         
-        $social = self::findSocialService($userAccount->id, $provider, $socialId);
+        //$social = self::findSocialService($userAccount->id, $provider, $socialId);
         
-        if($social === null){
-            self::postSocial($socialId, $userAccount, $provider, $token);
-        }
-    }
-    
-    public function findSocialService($userId, $service, $socialId){
-        return User_social::where('user_id', $userId)->where('service', $service)->where('social_id', $socialId)->first();
-    }
-    
-    function postSocial($socialId, $userAccount, $service, $token){
-        $social = User_social::create([
-            'social_id'=>$socialId,
-            'user_id'=>$userAccount->id,
-            'service'=>$service,
-            'token'=>$token,
-            'lastName'=>$userAccount->lastName,
-            'phone'=>$userAccount->phone,
-            'country'=>$userAccount->country,
-            'city'=>$userAccount->city,
-            'address'=>$userAccount->address,
-        ]);
+
     }
 }
