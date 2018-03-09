@@ -2,8 +2,6 @@
 
 namespace App\Auth;
 
-//use App\Models\User;
-
 class Auth{
     protected $container;
     
@@ -16,7 +14,6 @@ class Auth{
             $client = \ClientQuery::create()
             ->filterById($_SESSION['user'])
             ->find();
-            var_dump($client->getFirst());
             
             return $client->getFirst();
         }
@@ -30,7 +27,6 @@ class Auth{
         $client = \ClientQuery::create()
         ->filterByEmail($email)
         ->find();
-        var_dump($client->getFirst());
         
         return $client->getFirst();
     }

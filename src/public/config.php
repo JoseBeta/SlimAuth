@@ -22,7 +22,7 @@ return array(
         ),
         "Facebook" => array(
             "enabled" => true,
-            "keys" => array("id" => "143871072962876", "secret" => "f2ea6b17ad499cefa0c741a8536208da"),
+            "keys" => array("id" => "1977123019192303", "secret" => "d9a3c74d6c9a8f05dc80a2184b41231f"),
             "trustForwarded" => false,
         ),
         "Twitter" => array(
