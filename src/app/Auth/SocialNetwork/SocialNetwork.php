@@ -32,8 +32,8 @@ class SocialNetwork{
         return $token["access_token"];
     }
     
-    public function attempt($email){
-        $user = $this->container->auth->findUser($email);
+    public function attempt($userID, $service){
+        $user = $this->container->auth->findUser($userID, $service);
         
         if($user){
             $_SESSION['user'] = $user->id;

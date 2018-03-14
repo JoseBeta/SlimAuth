@@ -13,7 +13,7 @@ class Google extends SocialNetwork{
         $token = parent::getAccessToken($adapter);
         self::postSignUpGoogle($user, $token);
         
-        parent::attempt($user->email);
+        parent::attempt($user->identifier, "Google");
         
         $this->container->flash->addMessage('info', 'You have been signed up using Google+!');
         return $response->withRedirect($this->container->router->pathFor('home'));
@@ -21,14 +21,10 @@ class Google extends SocialNetwork{
     
     
     function postSignUpGoogle($user, $token){
+        $existUser = $this->container->auth->findUser($user->identifier, "Google");    
         
         
-        $userAccount;
-        $existingUser = $this->container->auth->findUser($user->email);
-        $userId;
-        $socialId = $user->identifier;
-        
-        if($existingUser === null){
+        if($existUser === null){
             $newUser = new \Client();
             $newUser->setEmail($user->email);
             $newUser->setName($user->firstName);
@@ -38,14 +34,11 @@ class Google extends SocialNetwork{
             $newUser->setCity($user->city);
             $newUser->setCountryId("1");
             $newUser->setCardData("2");
-            $newUser->setCountryName($user->region);
+            $newUser->setCountryName($user->country);
             $newUser->setSocialId($user->identifier);
             $newUser->setService("Google");
             $newUser->setToken($token);
             $newUser->save();
-            $userAccount = $newUser;
-        }else{
-            $userAccount = $existingUser;
         }
     }
 }

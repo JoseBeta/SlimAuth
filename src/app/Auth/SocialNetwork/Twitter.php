@@ -11,19 +11,16 @@ class Twitter extends SocialNetwork{
         $token = parent::getAccessToken($adapter);
         self::postSignUpTwitter($user, $token);
         
-        parent::attempt($user->email);
+        parent::attempt($user->identifier, "Twitter");
         
         $this->container->flash->addMessage('info', 'You have been signed up using Twitter!');
         return $response->withRedirect($this->container->router->pathFor('home'));
     }
     
     function postSignUpTwitter($user, $token){
-        $userAccount;
-        $existingUser = $this->container->auth->findUser($user->email);
-        $userId;
-        $socialId = $user->identifier;
+        $existUser = $this->container->auth->findUser($user->identifier, "Twitter");
         
-        if($existingUser === null){
+        if($existUser === null){
             $newUser = new \Client();
             $newUser->setEmail($user->email);
             $newUser->setName($user->firstName);
@@ -33,15 +30,11 @@ class Twitter extends SocialNetwork{
             $newUser->setCity($user->city);
             $newUser->setCountryId("1");
             $newUser->setCardData("2");
-            $newUser->setCountryName($user->region);
+            $newUser->setCountryName($user->country);
             $newUser->setSocialId($user->identifier);
             $newUser->setService("Twitter");
             $newUser->setToken($token);
             $newUser->save();
-            
-            $userAccount = $newUser;
-        }else{
-            $userAccount = $existingUser;
         }
     }
 }

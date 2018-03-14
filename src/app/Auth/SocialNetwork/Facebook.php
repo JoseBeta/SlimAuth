@@ -13,19 +13,16 @@ class Facebook extends SocialNetwork{
         $token = parent::getAccessToken($adapter);
         self::postSignUpFacebook($user, $token);
         
-        parent::attempt($user->email);
+        parent::attempt($user->identifier, "Facebook");
 
         $this->container->flash->addMessage('info', 'You have been signed up using Facebook!');
         return $response->withRedirect($this->container->router->pathFor('home'));
     }
     
     function postSignUpFacebook($user, $token){
-        $userAccount;
-        $existingUser = $this->container->auth->findUser($user->email);
-        $userId;
-        $socialId = $user->identifier;
+        $existUser = $this->container->auth->findUser($user->identifier, "Facebook");
         
-        if($existingUser === null){
+        if($existUser === null){
             $newUser = new \Client();
             $newUser->setEmail($user->email);
             $newUser->setName($user->firstName);
@@ -40,10 +37,6 @@ class Facebook extends SocialNetwork{
             $newUser->setService("Facebook");
             $newUser->setToken($token);
             $newUser->save();
-            
-            $userAccount = $newUser;
-        }else{
-            $userAccount = $existingUser;
         }
     }
 }

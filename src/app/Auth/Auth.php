@@ -23,28 +23,13 @@ class Auth{
         return isset($_SESSION['user']);
     }
     
-    public function findUser($email){
+    public function findUser($socialID, $service){
         $client = \ClientQuery::create()
-        ->filterByEmail($email)
+        ->filterByService($service)
+        ->filterBySocialId($socialID)
         ->find();
         
         return $client->getFirst();
-    }
-    
-    public function attempt($email, $password){
-        $user = self::findUser($email);
-        
-        if(!$user){
-            return false;
-        }
-        
-        if(password_verify($password, $user->password)){
-            $_SESSION['user'] = $user->id;
-            
-            return true;
-        }
-        
-        return false;
     }
     
     public function logout(){

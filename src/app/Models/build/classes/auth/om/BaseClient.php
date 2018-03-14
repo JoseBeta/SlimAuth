@@ -39,37 +39,37 @@ abstract class BaseClient extends BaseObject implements Persistent
      * The value for the name field.
      * @var        string
      */
-    protected $name;
+    public $name;
 
     /**
      * The value for the surname field.
      * @var        string
      */
-    protected $surname;
+    public $surname;
 
     /**
      * The value for the email field.
      * @var        string
      */
-    protected $email;
+    public $email;
 
     /**
      * The value for the tlf field.
      * @var        string
      */
-    protected $tlf;
+    public $tlf;
 
     /**
      * The value for the adress field.
      * @var        string
      */
-    protected $adress;
+    public $adress;
 
     /**
      * The value for the city field.
      * @var        string
      */
-    protected $city;
+    public $city;
 
     /**
      * The value for the country_id field.
@@ -87,7 +87,7 @@ abstract class BaseClient extends BaseObject implements Persistent
      * The value for the country_name field.
      * @var        string
      */
-    protected $country_name;
+    public $country_name;
 
     /**
      * The value for the social_id field.
@@ -99,7 +99,7 @@ abstract class BaseClient extends BaseObject implements Persistent
      * The value for the service field.
      * @var        string
      */
-    protected $service;
+    public $service;
 
     /**
      * The value for the token field.

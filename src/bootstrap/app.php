@@ -48,6 +48,10 @@ $container['validator'] = function($container){
     return new App\Validation\Validator;
 };
 
+$container['fillValidator'] = function($container){
+    return new App\Validation\FillValidator;
+};
+
 $container['HomeController'] = function($container){
     return new \App\Controllers\HomeController($container);
 };
@@ -97,6 +101,7 @@ $container['googleAuth'] = function($container){
 $app->add(new \App\Middleware\ValidationErrorsMiddleware($container));
 $app->add(new \App\Middleware\OldInputMiddleware($container));
 $app->add(new \App\Middleware\CsrfViewMiddleware($container));
+$app->add(new \App\Middleware\AutoFillMiddleware($container));
 
 $app->add($container->csrf);
 
